@@ -4,6 +4,8 @@ import { Footer } from "@/components/layout/Footer";
 import { HomePage } from "@/pages/HomePage";
 import { MenuPage } from "@/pages/MenuPage";
 import { CheckoutPage } from "@/pages/CheckoutPage";
+import { LocationsPage } from "@/pages/LocationsPage";
+import { RewardsPage } from "@/pages/RewardsPage";
 import { Toaster } from "@/components/ui/sonner";
 import { RouteErrorBoundary } from "@/components/RouteErrorBoundary";
 import { CartDrawer } from "@/components/cart/CartDrawer";
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <CheckoutPage />,
+      },
+      {
+        path: "locations",
+        element: <LocationsPage />,
+      },
+      {
+        path: "rewards",
+        element: <RewardsPage />,
       },
     ],
   },

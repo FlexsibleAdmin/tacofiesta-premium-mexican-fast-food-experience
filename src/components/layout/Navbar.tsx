@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, Menu, X, MapPin } from "lucide-react";
+import { ShoppingBag, Menu, MapPin } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useCartStore } from "@/store/use-cart-store";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const items = useCartStore((s) => s.items);
   const toggleCart = useCartStore((s) => s.toggleCart);
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
@@ -22,11 +23,11 @@ export function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Menu", path: "/menu" },
-    { name: "Locations", path: "#" },
-    { name: "Rewards", path: "#" },
+    { name: "Locations", path: "/locations" },
+    { name: "Rewards", path: "/rewards" },
   ];
   return (
-    <header 
+    <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled ? "bg-background/95 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
@@ -37,7 +38,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 bg-brand rounded-lg flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-300">
-              <span className="text-2xl">����</span>
+              <span className="text-2xl">🌮</span>
             </div>
             <span className={cn(
               "font-display font-bold text-2xl tracking-tight uppercase",
@@ -63,12 +64,15 @@ export function Navbar() {
           </nav>
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-2 text-sm font-medium text-muted-foreground cursor-pointer hover:text-brand transition-colors">
+            <div 
+              className="hidden sm:flex items-center gap-2 text-sm font-medium text-muted-foreground cursor-pointer hover:text-brand transition-colors"
+              onClick={() => navigate('/locations')}
+            >
               <MapPin className="w-4 h-4" />
               <span>Select Location</span>
             </div>
             <ThemeToggle className="relative top-0 right-0" />
-            <Button 
+            <Button
               onClick={toggleCart}
               className="relative bg-brand hover:bg-brand-dark text-white rounded-full w-12 h-12 p-0 shadow-lg hover:scale-105 transition-all"
             >
