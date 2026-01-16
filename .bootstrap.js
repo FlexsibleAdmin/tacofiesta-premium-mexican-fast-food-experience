@@ -78,7 +78,8 @@ function updateWranglerJsonc() {
 
 function runSetupCommands() {
     const commands = [
-    "bun add embla-carousel-autoplay@^8.0.0"
+    "bun add embla-carousel-autoplay@^8.0.0",
+    "bun add react-confetti"
 ];
     
     if (commands.length === 0) {
