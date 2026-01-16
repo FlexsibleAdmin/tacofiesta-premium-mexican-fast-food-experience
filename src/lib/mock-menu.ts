@@ -1,25 +1,6 @@
-export interface Modifier {
-  id: string;
-  name: string;
-  price: number;
-  type: 'boolean' | 'quantity';
-  default: boolean | number;
-}
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  calories: number;
-  image: string;
-  categoryId: string;
-  popular?: boolean;
-  modifiers?: Modifier[];
-}
-export interface Category {
-  id: string;
-  name: string;
-}
+import { Category, Modifier, Product } from "@shared/types";
+// Re-export types for backward compatibility with existing components
+export type { Category, Modifier, Product };
 export const CATEGORIES: Category[] = [
   { id: 'featured', name: 'Featured' },
   { id: 'cravings', name: 'Cravings Value' },

@@ -1,10 +1,12 @@
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useCartStore } from "@/store/use-cart-store";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useNavigate } from "react-router-dom";
 export function CartDrawer() {
+  const navigate = useNavigate();
   const isOpen = useCartStore((s) => s.isOpen);
   const setOpen = useCartStore((s) => s.setOpen);
   const items = useCartStore((s) => s.items);
@@ -13,6 +15,10 @@ export function CartDrawer() {
   const subtotal = items.reduce((acc, item) => acc + item.totalPrice * item.quantity, 0);
   const tax = subtotal * 0.08; // Mock tax
   const total = subtotal + tax;
+  const handleCheckout = () => {
+    setOpen(false);
+    navigate("/checkout");
+  };
   return (
     <Sheet open={isOpen} onOpenChange={setOpen}>
       <SheetContent className="w-full sm:max-w-md flex flex-col p-0">
@@ -41,9 +47,9 @@ export function CartDrawer() {
               {items.map((item) => (
                 <div key={item.id} className="flex gap-4">
                   <div className="w-20 h-20 rounded-md overflow-hidden shrink-0 bg-muted">
-                    <img 
-                      src={item.product.image} 
-                      alt={item.product.name} 
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -62,21 +68,21 @@ export function CartDrawer() {
                     </div>
                     <div className="flex items-center justify-between pt-2">
                       <div className="flex items-center border rounded-md h-8">
-                        <button 
+                        <button
                           className="px-2 hover:bg-muted h-full flex items-center"
                           onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
                         >
                           <Minus className="w-3 h-3" />
                         </button>
                         <span className="w-8 text-center text-xs font-bold">{item.quantity}</span>
-                        <button 
+                        <button
                           className="px-2 hover:bg-muted h-full flex items-center"
                           onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
                         >
                           <Plus className="w-3 h-3" />
                         </button>
                       </div>
-                      <button 
+                      <button
                         className="text-muted-foreground hover:text-destructive transition-colors"
                         onClick={() => removeItem(item.id)}
                       >
@@ -106,7 +112,10 @@ export function CartDrawer() {
                 <span>${total.toFixed(2)}</span>
               </div>
             </div>
-            <Button className="w-full h-12 text-lg font-bold bg-brand hover:bg-brand-dark text-white shadow-lg">
+            <Button 
+              className="w-full h-12 text-lg font-bold bg-brand hover:bg-brand-dark text-white shadow-lg"
+              onClick={handleCheckout}
+            >
               Checkout
             </Button>
           </div>
