@@ -1,6 +1,6 @@
 # TacoFiesta - Premium Mexican Fast Food Experience
 
-[aureliabutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/FlexsibleAdmin/tacofiesta-premium-mexican-fast-food-experience)
 
 TacoFiesta is a visually immersive, high-fidelity web application cloning the core experience of a modern fast-food ordering platform like Taco Bell. It features a vibrant, appetite-inducing interface designed to showcase delicious Mexican-inspired food.
 
@@ -66,7 +66,7 @@ This will start the Vite development server, typically at `http://localhost:3000
 
 This project is designed to be deployed to Cloudflare Workers.
 
-[aureliabutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/FlexsibleAdmin/tacofiesta-premium-mexican-fast-food-experience)
 
 ### Manual Deployment
 
